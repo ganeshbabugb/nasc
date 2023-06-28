@@ -5,8 +5,8 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  HStack,
   Heading,
+  HStack,
   Image,
   Input,
   InputGroup,
@@ -63,7 +63,7 @@ const SuperAdminRegisterPage = () => {
           name,
           id,
           password,
-          role: userRoles.superadmin,
+          role: userRoles.student,
         }).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate("/");
@@ -155,7 +155,7 @@ const SuperAdminRegisterPage = () => {
                   mt={2}
                   color={textColor}
                 >
-                  STUDENT REGISTER PORTAL
+                  SUPER ADMIN REGISTER PORTAL
                 </Heading>
                 <FormControl isInvalid={errors.name}>
                   <FormLabel>User Name:</FormLabel>

@@ -15,7 +15,14 @@ const authUser = asyncHandler(async (req, res) => {
     user.lastLogin = new Date();
     await user.save();
 
-    generateToken(res, user._id);
+    const token = generateToken(user._id);
+
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+    });
 
     res.json({
       _id: user._id,
@@ -53,7 +60,12 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
-    generateToken(res, user._id);
+    const token = generateToken(user._id);
+
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      expires: new Date(Date.now() + 1 * 60 * 60 * 1000), // Set cookie expiration to 1 hour
+    });
 
     res.status(201).json({
       _id: user._id,
@@ -125,6 +137,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 });
+
 export {
   authUser,
   registerUser,

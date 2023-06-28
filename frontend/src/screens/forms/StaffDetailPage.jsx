@@ -31,33 +31,6 @@ const StaffDetails = () => {
     reset,
   } = useForm({
     mode: "onChange",
-    defaultValues: {
-      name: "a",
-      designation: "a",
-      department: "a",
-      spouseName: "a",
-      spouseDesignation: "a",
-      email: "a@gmail.com",
-      mobileNumber: "89",
-      altMobileNumber: "89",
-      dob: "2023-06-29",
-      yearOfExperience: "99",
-      yearOfEnrollment: "99",
-      bloodGroup: "a",
-      religion: "a",
-      community: "a",
-      caste: "a",
-      permanentAddress: "aa",
-      communicationAddress: "aaa",
-      gender: {
-        label: "Male",
-        value: "Male",
-      },
-      maritalStatus: {
-        label: "Not Married",
-        value: "Not Married",
-      },
-    },
   });
 
   const onSubmitForm = (data) => {

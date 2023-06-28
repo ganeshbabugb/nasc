@@ -25,6 +25,7 @@ import {
 import { Select } from "chakra-react-select";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import CustomBox from "../../components/CustomBox/CustomBox";
 import CustomSelectWithInput from "../../components/CustomSelect/CustomSelectWithInput";
 import IconCircle from "../../components/Icons/IconCircle";
@@ -36,7 +37,6 @@ import {
   mediumOfStudy,
   twelfthGradeSubjects,
 } from "../../utils/constants/variables";
-import { Link } from "react-router-dom";
 
 const AcademicDetails = () => {
   const [total, setTotal] = useState(0);

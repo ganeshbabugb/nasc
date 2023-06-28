@@ -5,8 +5,8 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  HStack,
   Heading,
+  HStack,
   Image,
   Input,
   InputGroup,
@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link as ReachLink, useNavigate } from "react-router-dom";
 import bgCardAuth from "../assets/img/bgAuth.webp";
 import bgAuth from "../assets/img/lineas-fondo-auth.png";
+import ChakraToast from "../helpers/ChakraToast";
 import { setCredentials } from "../slices/authSlice";
 import { useLoginMutation } from "../slices/usersApiSlice";
 
@@ -54,10 +55,11 @@ const LoginPage = () => {
       // const { email, password } = data;
       const res = await login(data).unwrap();
       dispatch(setCredentials({ ...res }));
+      ChakraToast("Success", "Login Sucessfull!", "success", 3000);
       navigate("/");
     } catch (err) {
-      // toast.error(err?.data?.message || err.error);
-      console.error(err?.data?.message || err.error);
+      ChakraToast("Error", err?.data?.message || err.error, "success", 3000);
+      // console.error(err?.data?.message || err.error);
     }
   };
 

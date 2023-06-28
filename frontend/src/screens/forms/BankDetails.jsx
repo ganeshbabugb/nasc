@@ -13,13 +13,14 @@ import {
   Stack,
   Tooltip,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import CustomBox from "../../components/CustomBox/CustomBox";
 import IconCircle from "../../components/Icons/IconCircle";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../../utils/constants/config";
 
 const BankDetails = () => {
   const {
@@ -38,7 +39,7 @@ const BankDetails = () => {
   const onFormSubmit = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/bank-details",
+        `${API_BASE_URL}/api/bank-details`,
         { _id: userInfo?._id, ...data },
         {
           headers: { "Content-Type": "application/json" },

@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { read, utils } from "xlsx";
 import CustomBox from "../../components/CustomBox/CustomBox";
 import ChakraToast from "../../helpers/ChakraToast";
+import { API_BASE_URL } from "../../utils/constants/config";
 import { userRoles } from "../../utils/constants/roles";
 
 const API_URL = {
@@ -59,7 +60,7 @@ const AccountCreation = () => {
           : undefined,
     }));
     // Make a POST request to the backend API endpoint
-    fetch(API_URL[role], {
+    fetch(API_BASE_URL + API_URL[role], {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

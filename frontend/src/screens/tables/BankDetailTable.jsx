@@ -52,18 +52,20 @@ import { saveAs } from "file-saver";
 import React, { useEffect, useState } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
 import { useTable } from "react-table";
 import CustomBox from "../../components/CustomBox/CustomBox";
 import IconCircle from "../../components/Icons/IconCircle";
 import ChakraToast from "../../helpers/ChakraToast";
-import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../../utils/constants/config";
 
 const fetchData = async (pageSize, offset, searchTerm, sortBy, sortOrder) => {
+  console.log("base:", import.meta.env.VITE_API_BASE_URL);
   const searchQuery = searchTerm ? `&search=${searchTerm}` : "";
   const sortQuery = sortBy ? `&sortBy=${sortBy}&sortOrder=${sortOrder}` : "";
   return await fetch(
-    `/api/bank-details?limit=${pageSize}&offset=${offset}${searchQuery}${sortQuery}`
+    `${API_BASE_URL}/api/bank-details?limit=${pageSize}&offset=${offset}${searchQuery}${sortQuery}`
   ).then(async (res) => await res.json());
 };
 
@@ -137,9 +139,12 @@ const BankDetailTable = () => {
   const handleDownload = async () => {
     try {
       // Make the API request using your axios instance
-      const response = await axios.get("/api/export-bank-detail-to-excel", {
-        responseType: "blob", // Set the response type to blob
-      });
+      const response = await axios.get(
+        `${API_BASE_URL}/api/export-bank-detail-to-excel`,
+        {
+          responseType: "blob", // Set the response type to blob
+        }
+      );
 
       // Extract the filename from the response headers
       const contentDisposition = response.headers["content-disposition"];

@@ -14,13 +14,16 @@ import {
   Textarea,
   Tooltip,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CustomBox from "../../components/CustomBox/CustomBox";
 import CustomSelect from "../../components/CustomSelect/CustomSelect";
 import CustomSelectWithInput from "../../components/CustomSelect/CustomSelectWithInput";
 import IconCircle from "../../components/Icons/IconCircle";
+import { API_BASE_URL } from "../../utils/constants/config";
 import {
   GroupedStatesAndUnionTerritories,
   defaultOptions,
@@ -28,8 +31,6 @@ import {
   districts,
   gender,
 } from "../../utils/constants/variables";
-import { useSelector } from "react-redux";
-import axios from "axios";
 
 const StudentDetails = () => {
   const [shouldReset, setShouldReset] = React.useState(false);
@@ -63,7 +64,7 @@ const StudentDetails = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/studentDetail",
+        `${API_BASE_URL}/api/studentDetail`,
         {
           _id: userInfo?._id,
           gender: gender.value,
