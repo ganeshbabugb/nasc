@@ -63,7 +63,7 @@ const fetchData = async (pageSize, offset, searchTerm, sortBy, sortOrder) => {
   const searchQuery = searchTerm ? `&search=${searchTerm}` : "";
   const sortQuery = sortBy ? `&sortBy=${sortBy}&sortOrder=${sortOrder}` : "";
   return await fetch(
-    `http://localhost:5000/api/bank-details?limit=${pageSize}&offset=${offset}${searchQuery}${sortQuery}`
+    `/api/bank-details?limit=${pageSize}&offset=${offset}${searchQuery}${sortQuery}`
   ).then(async (res) => await res.json());
 };
 

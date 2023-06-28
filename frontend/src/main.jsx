@@ -18,7 +18,6 @@ import StaffDetails from "./screens/forms/StaffDetailPage.jsx";
 import StudentDetails from "./screens/forms/StudentDetails.jsx";
 import HomeScreen from "./screens/HomeScreen.jsx";
 import LoginScreen from "./screens/LoginScreen.jsx";
-import ProfileScreen from "./screens/ProfileScreen.jsx";
 import NotFoundPage from "./screens/results/404/NotFoundPage.jsx";
 import UnderConstruction from "./screens/results/construction/PageConstruction.jsx";
 import Loading from "./screens/results/loading/Loading.jsx";
@@ -43,7 +42,6 @@ const router = createBrowserRouter(
           {/* Get Home Page Based On User Roles */}
           <Route index={true} path="/" element={<HomeScreen />} />
         </Route>
-        <Route path="/profile" element={<ProfileScreen />} />
 
         {/* Results Routes */}
         <Route path="/results" element={<Dashboard />}>
