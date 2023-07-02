@@ -11,7 +11,7 @@ router.post("/bank-details", protect, bankDetailsController.create);
 // router.get("/bank-details", bankDetailsController.getAll);
 
 // Get a bank detail by ID
-router.get("/bank-details/:bankDetailId", bankDetailsController.getById);
+router.get("/bank-detail", protect, bankDetailsController.get);
 
 // Delete a bank detail by ID
 router.delete("/bank-details/:bankDetailsId", bankDetailsController.deleteById);

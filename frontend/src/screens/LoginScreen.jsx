@@ -52,13 +52,12 @@ const LoginPage = () => {
 
   const submitHandler = async (data) => {
     try {
-      // const { email, password } = data;
       const res = await login(data).unwrap();
       dispatch(setCredentials({ ...res }));
       ChakraToast("Success", "Login Sucessfull!", "success", 3000);
       navigate("/");
     } catch (err) {
-      ChakraToast("Error", err?.data?.message || err.error, "success", 3000);
+      ChakraToast("Error", err?.data?.message || err.error, "error", 3000);
       // console.error(err?.data?.message || err.error);
     }
   };

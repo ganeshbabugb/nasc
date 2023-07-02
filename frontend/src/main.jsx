@@ -12,8 +12,8 @@ import App from "./App.jsx";
 import Auth from "./components/Auth.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Dashboard from "./layouts/Dashboard.jsx";
+import BankDetailsScreen from "./screens/BankDetailsScreen.jsx";
 import AcademicDetails from "./screens/forms/AcademicDetails.jsx";
-import BankDetails from "./screens/forms/BankDetails.jsx";
 import StaffDetails from "./screens/forms/StaffDetailPage.jsx";
 import StudentDetails from "./screens/forms/StudentDetails.jsx";
 import HomeScreen from "./screens/HomeScreen.jsx";
@@ -84,7 +84,7 @@ const router = createBrowserRouter(
             />
           }
         >
-          <Route path="/bank-detail" element={<BankDetails />} />
+          <Route path="/bank-detail" element={<BankDetailsScreen />} />
         </Route>
 
         {/* RBA : ONLY STUDENT */}

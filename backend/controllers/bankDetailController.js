@@ -1,23 +1,30 @@
-import BankDetails from "../models/bankDetailModel.js";
 import ExcelJS from "exceljs";
+import BankDetails from "../models/bankDetailModel.js";
 
 export const bankDetailsController = {
   async create(req, res, next) {
     try {
       const { name, bankName, branchName, accountNumber, ifscCode } = req.body;
-
-      const bankDetails = new BankDetails({
-        user: req.user._id,
-        name,
-        bankName,
-        branchName,
-        accountNumber,
-        ifscCode,
-      });
-
+      const userId = req.user._id;
+      let bankDetails = await BankDetails.findOne({ user: userId });
+      if (bankDetails) {
+        bankDetails.name = name || bankDetails.name;
+        bankDetails.bankName = bankName || bankDetails.bankName;
+        bankDetails.branchName = branchName || bankDetails.branchName;
+        bankDetails.accountNumber = accountNumber || bankDetails.accountNumber;
+        bankDetails.ifscCode = ifscCode || bankDetails.ifscCode;
+      } else {
+        bankDetails = new BankDetails({
+          user: userId,
+          name,
+          bankName,
+          branchName,
+          accountNumber,
+          ifscCode,
+        });
+      }
       await bankDetails.save();
-
-      res.status(201).json({ bankDetails });
+      res.status(bankDetails ? 200 : 201).json({ bankDetails });
     } catch (error) {
       next(error);
     }
@@ -26,19 +33,16 @@ export const bankDetailsController = {
   async getAll(req, res, next) {
     try {
       const bankDetails = await BankDetails.find();
-
       res.status(200).json({ bankDetails });
     } catch (error) {
       next(error);
     }
   },
 
-  async getById(req, res, next) {
+  async get(req, res, next) {
     try {
-      const { bankDetailId } = req.params;
-
-      const bankDetails = await BankDetails.findById(bankDetailId);
-
+      const userId = req.user._id;
+      const bankDetails = await BankDetails.findOne({ user: userId });
       if (!bankDetails) {
         const error = {
           status: 404,
@@ -46,8 +50,7 @@ export const bankDetailsController = {
         };
         throw error;
       }
-
-      res.status(200).json({ bankDetails });
+      res.status(200).json(bankDetails);
     } catch (error) {
       next(error);
     }
@@ -56,9 +59,7 @@ export const bankDetailsController = {
   async deleteById(req, res, next) {
     try {
       const { bankDetailsId } = req.params;
-
       await BankDetails.findByIdAndDelete(bankDetailsId);
-
       res.status(200).json({ message: "Bank details deleted successfully" });
     } catch (error) {
       next(error);
@@ -69,7 +70,6 @@ export const bankDetailsController = {
     try {
       const { bankDetailId } = req.params;
       const { name, bankName, branchName, accountNumber, ifscCode } = req.body;
-
       const updatedBankDetails = await BankDetails.findByIdAndUpdate(
         bankDetailId,
         {
@@ -81,7 +81,6 @@ export const bankDetailsController = {
         },
         { new: true }
       );
-
       res.status(200).json({ bankDetails: updatedBankDetails });
     } catch (error) {
       next(error);

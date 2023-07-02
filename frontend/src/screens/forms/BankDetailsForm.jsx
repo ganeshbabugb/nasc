@@ -22,13 +22,13 @@ import CustomBox from "../../components/CustomBox/CustomBox";
 import IconCircle from "../../components/Icons/IconCircle";
 import { API_BASE_URL } from "../../utils/constants/config";
 
-const BankDetails = () => {
+const BankDetailsForm = ({ preloadedValues }) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm({ mode: "onChange" });
+  } = useForm({ defaultValues: preloadedValues, mode: "onChange" });
 
   const handleReset = () => {
     reset();
@@ -160,7 +160,7 @@ const BankDetails = () => {
           <CustomBox>
             <Stack>
               <Button type="submit" colorScheme="blue">
-                SUBMIT
+                {preloadedValues === null ? "SUBMIT" : "UPDATE"}
               </Button>
             </Stack>
           </CustomBox>
@@ -170,4 +170,4 @@ const BankDetails = () => {
   );
 };
 
-export default BankDetails;
+export default BankDetailsForm;

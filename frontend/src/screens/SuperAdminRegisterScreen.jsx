@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link as ReachLink, useNavigate } from "react-router-dom";
 import bgCardAuth from "../assets/img/bgAuth.webp";
 import bgAuth from "../assets/img/lineas-fondo-auth.png";
+import ChakraToast from "../helpers/ChakraToast";
 import { setCredentials } from "../slices/authSlice";
 import { useRegisterMutation } from "../slices/usersApiSlice";
 import { userRoles } from "../utils/constants/roles";
@@ -54,7 +55,7 @@ const SuperAdminRegisterPage = () => {
   const onSubmit = async (data) => {
     console.log("data:", data);
     if (data.password !== data.confirmPassword) {
-      // toast.error("Passwords do not match");
+      ChakraToast("Error", "Passwords do not match", "error", 3000);
       console.log("Passwords do not match");
     } else {
       try {
@@ -63,13 +64,13 @@ const SuperAdminRegisterPage = () => {
           name,
           id,
           password,
-          role: userRoles.student,
+          role: userRoles.superadmin,
         }).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate("/");
+        ChakraToast("Success", "Register Sucessfull!", "success", 3000);
       } catch (err) {
-        // toast.error(err?.data?.message || err.error);
-        console.log("err:", err);
+        ChakraToast("Error", err?.data?.message || err.error, "error", 3000);
       }
     }
   };

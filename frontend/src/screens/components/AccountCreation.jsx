@@ -130,7 +130,8 @@ const AccountCreation = () => {
         )}
         <FormHelperText color={"gray.500"}>
           To create an accounts, upload an xls, xlsx or ods file with the
-          following columns: id, name, password.
+          following columns: id, name, password
+          {userInfo.role === userRoles.superadmin ? ", departmentName" : ""}.
         </FormHelperText>
       </FormControl>
       <Button
